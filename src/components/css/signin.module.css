@@ -3,6 +3,7 @@
   
   width: 80%;
   margin: 0 auto;
+  height: 100vh;
   border: 1px red solid;
   /* flex-direction: column;
   align-items: center;
@@ -11,8 +12,38 @@
   color:black;
 }
 
-.test{
-  color: blue;
+.header{
+  border: 1px yellow solid;
+  width: 80%;
+  text-align: center;
+  position: relative;
+  top: 70px;
+  font-size: 5rem;
+  height: auto;
+  margin: auto;
 }
+
+.greeting{
+  border: 1px black solid;
+  position: relative;
+  top: 90px;
+}
+.input{
+  
+  position: relative;
+  top: 200px;
+  width: 600px;
+  border: 1px green solid;
+
+
+  margin:  auto;
+
+
+}
+
+.center{
+  text-align: center;
+}
+
 
 
