@@ -1,0 +1,65 @@
+.otpInput{
+    height: 35px;
+    width: 45px;
+    border: 1px black solid;
+    margin-left: 25px;
+    font-size: 1em;
+}
+
+.msg span {
+    font-size: .8em;
+    opacity: .7;
+    cursor: pointer;
+
+}
+
+.button{
+    font-size: 1.5rem;
+    width: 120px;
+    border-radius: 29px;
+    background: orange;
+    padding: 5px;
+    cursor:pointer;
+  
+  }
+    
+
+
+
+.otpContainer{
+    position: relative;
+    display: flex;
+    height: 200px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    top: 200px;
+    width:60%;
+    
+    border: 1px green solid;
+    text-align: center;
+  
+  
+    margin:  auto;
+}
+
+@media only screen and (max-width:805px){
+    /*Tablets [601px -> 1200px]*/
+    .otpContainer{
+        position: relative;
+        display: flex;
+        height: 200px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        top: 200px;
+        width:100%;
+        /* min-width: 495px; */
+        border: 1px green solid;
+        text-align: center;
+      
+      
+        margin:  auto;
+    }
+}
+
