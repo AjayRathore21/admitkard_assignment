@@ -1,4 +1,4 @@
-import React, { Component, ReactDOM } from "react";
+import React from "react";
 import styles from "./css/otpinput.module.css";
 
 class OtpInput extends React.Component {

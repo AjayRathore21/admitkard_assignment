@@ -1,18 +1,9 @@
-import React, { useRef } from "react";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-  Link,
-  Outlet,
-} from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signin from "./Singin";
 import OtpScreen from "./OtpScreen";
 
 function App() {
-  const inputRef = useRef(null);
-
   const CreateRouter = createBrowserRouter([
     {
       path: "/",

@@ -1,10 +1,23 @@
 import styles from "./css/signin.module.css";
-
+import { useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signin() {
-//   const inputRef = useRef(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const handleClick = () => {
+    toast.success('Your OTP', {
+        position: toast.POSITION.TOP_CENTER
+    });
+    console.log(phoneNumber, "inside signin at 10");
+  };
+
+  const handleChange = (value) => { 
+    setPhoneNumber(value);
+  };
 
   return (
     <div className={styles.container}>
@@ -17,6 +30,8 @@ function Signin() {
 
       <div className={styles.input}>
         <PhoneInput
+          onChange={handleChange}
+          value={phoneNumber}
           inputStyle={{ width: "100%" }}
           country={"in"}
           enableSearch={true}
@@ -28,7 +43,10 @@ function Signin() {
         </span>
         <br />
 
-        <button className={styles.button}>Submit</button>
+        <button onClick={handleClick} className={styles.button}>
+          Submit
+        </button>
+        <ToastContainer/>
       </div>
     </div>
   );
