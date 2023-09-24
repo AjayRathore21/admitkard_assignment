@@ -31,7 +31,7 @@ export default function OtpScreen(props) {
           country={"in"}
           enableSearch={true}
         /> */}
-        <OtpInput state={props.state} />
+        <OtpInput state={props.state} setState = {props.setState} />
         <ToastContainer />
 
         {/* </div> */}

@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./css/otpinput.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class OtpInput extends React.Component {
   constructor(props) {
@@ -13,15 +15,23 @@ class OtpInput extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleResend = this.handleResend.bind(this);
   }
 
   handleChange(value1, event) {
     this.setState({ [value1]: event.target.value });
   }
 
-  handleSubmit(event) {
-    const data = new FormData(event.target);
+  handleResend() {
+    fetch(`http://localhost:8000/${this.props.state.phoneNumber}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        this.props.setState({ ...this.state, otp: data.otp });
+      });
+  }
 
+  handleSubmit(event) {
     console.log(this.state);
     event.preventDefault();
 
@@ -42,6 +52,18 @@ class OtpInput extends React.Component {
       .then((data) => {
         // Handle the response data
         console.log("Response data:", data);
+        if (data.verification === "success") {
+          toast.success(`Woohoo Verification Done😊😍 `, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error(
+            `Please enter correct OTP😒,click on resend to genrate otp again!! `,
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          );
+        }
       })
       .catch((error) => {
         // Handle errors
@@ -119,11 +141,14 @@ class OtpInput extends React.Component {
 
           <div className={styles.msg}>
             <span>Don't recevie the code?</span>
-            <span style={{ color: "darkorange" }}>Resend</span>
+            <span onClick={this.handleResend} style={{ color: "darkorange" }}>
+              Resend
+            </span>
           </div>
 
           <button className={styles.button}> Veryfiy</button>
         </div>
+        <ToastContainer />
       </form>
     );
   }
