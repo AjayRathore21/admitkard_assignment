@@ -5,13 +5,11 @@ class OtpInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
       otp1: "",
       otp2: "",
       otp3: "",
       otp4: "",
-      otp5: "",
-      disable: true,
+      number: this.props.state.phoneNumber,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,8 +21,32 @@ class OtpInput extends React.Component {
 
   handleSubmit(event) {
     const data = new FormData(event.target);
+
     console.log(this.state);
     event.preventDefault();
+
+    fetch("http://localhost:8000/opt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Set the content type to JSON
+        // You can add more headers if necessary
+      },
+      body: JSON.stringify(this.state), // Convert the object to JSON format
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Parse the response JSON
+      })
+      .then((data) => {
+        // Handle the response data
+        console.log("Response data:", data);
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("Error:", error);
+      });
   }
 
   inputfocus = (elmnt) => {
@@ -37,7 +59,7 @@ class OtpInput extends React.Component {
       console.log("next");
 
       const next = elmnt.target.tabIndex;
-      if (next < 5) {
+      if (next < 4) {
         elmnt.target.form.elements[next].focus();
       }
     }
@@ -47,7 +69,7 @@ class OtpInput extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className={styles.otpContainer}>
-          <div >
+          <div>
             <input
               name="otp1"
               type="text"
@@ -93,25 +115,14 @@ class OtpInput extends React.Component {
               maxLength="1"
               onKeyUp={(e) => this.inputfocus(e)}
             />
-
-            <input
-              name="otp5"
-              type="text"
-              autoComplete="off"
-              className={styles.otpInput}
-              onChange={(e) => this.handleChange("otp5", e)}
-              tabIndex="5"
-              maxLength="1"
-              onKeyUp={(e) => this.inputfocus(e)}
-            />
           </div>
 
-          <div className={styles.msg} >
+          <div className={styles.msg}>
             <span>Don't recevie the code?</span>
-            <span style={{color:'darkorange'}}>Resend</span>
+            <span style={{ color: "darkorange" }}>Resend</span>
           </div>
 
-          <button  className={styles.button}> Veryfiy</button>
+          <button className={styles.button}> Veryfiy</button>
         </div>
       </form>
     );

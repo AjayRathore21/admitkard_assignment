@@ -1,22 +1,27 @@
 import styles from "./css/signin.module.css";
-import { useRef, useState } from "react";
+// import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-function Signin() {
-  const [phoneNumber, setPhoneNumber] = useState("");
+function Signin(props) {
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    toast.success('Your OTP', {
-        position: toast.POSITION.TOP_CENTER
-    });
-    console.log(phoneNumber, "inside signin at 10");
+    // console.log(phoneNumber, "inside signin at 10");
+    fetch(`http://localhost:8000/${props.state.phoneNumber}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        props.setState({ ...props.state, otp: data.otp });
+
+        navigate("/otp");
+      });
   };
 
-  const handleChange = (value) => { 
-    setPhoneNumber(value);
+  const handleChange = (value) => {
+    props.setState({ ...props.state, phoneNumber: value });
   };
 
   return (
@@ -31,7 +36,7 @@ function Signin() {
       <div className={styles.input}>
         <PhoneInput
           onChange={handleChange}
-          value={phoneNumber}
+          value={props.state.phoneNumber}
           inputStyle={{ width: "100%" }}
           country={"in"}
           enableSearch={true}
@@ -46,7 +51,6 @@ function Signin() {
         <button onClick={handleClick} className={styles.button}>
           Submit
         </button>
-        <ToastContainer/>
       </div>
     </div>
   );
