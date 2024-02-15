@@ -2,6 +2,8 @@
 
 Admitkard ReactJs WebApp is a web application developed as an assignment by AdmitKard company. This application is designed for phone number verification via OTP.
 
+Project Video->https://drive.google.com/file/d/1dggv7Z3XCA9ulqWOTKhoWeo5fJ9UA3PX/view
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
