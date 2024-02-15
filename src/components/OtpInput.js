@@ -23,7 +23,9 @@ class OtpInput extends React.Component {
   }
 
   handleResend() {
-    fetch(`http://localhost:8000/${this.props.state.phoneNumber}`)
+    fetch(
+      `https://admitkard-backend-otp.vercel.app/${this.props.state.phoneNumber}`
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -35,7 +37,7 @@ class OtpInput extends React.Component {
     console.log(this.state);
     event.preventDefault();
 
-    fetch("http://localhost:8000/opt", {
+    fetch("https://admitkard-backend-otp.vercel.app/opt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set the content type to JSON
