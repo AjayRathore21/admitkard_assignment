@@ -34,7 +34,7 @@ class OtpInput extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(this.state);
+    // console.log(this.state);
     event.preventDefault();
 
     fetch("https://admitkard-backend-otp.vercel.app/opt", {
